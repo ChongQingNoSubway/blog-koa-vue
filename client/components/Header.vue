@@ -1,8 +1,8 @@
 <template>
     <div id="header">
         <ul class="link-wrapper">
-            <router-link :to="{ name: 'home' }"><i class="icon icon-home"></i>Home page</router-link>
-            <router-link :to="{ name: 'focus' }"><i class="icon icon-layers"></i>Follow list</router-link>
+            <router-link :to="{ name: 'home' }"><i class="icon icon-grid"></i>Home</router-link>
+            <router-link :to="{ name: 'focus' }"><i class="icon icon-heart-on"></i>Following list</router-link>
         </ul>
         <div class="write">
             <at-button type="primary" @click="toWrite">Blog</at-button>
@@ -13,9 +13,9 @@
                 <img src="../../static/defaultAvatar.png" alt="404" @click="toUserCenter" v-else>
                 <a @click="logout">sign out</a>
             </div>
-            <div v-else>
-                <router-link :to="{ name: 'login' }">login</router-link>
-                <router-link :to="{ name: 'register' }">register</router-link>
+            <div v-else class="user-register">
+                <at-button class="clickbox" type="success" ><router-link :to="{ name: 'login' }" class="login">login</router-link></at-button>
+                <at-button class="clickbox" type="error" ><router-link :to="{ name: 'register' }" class="register">register</router-link></at-button>
             </div>
         </div>
     </div>
@@ -74,40 +74,23 @@ export default {
 
 <style lang="stylus">
     #header
-        height 45px;
+        height 88px;
         background-color #fff;
         display flex;
         .link-wrapper
-            flex 20;
+            flex 10;
             >a
                 list-style-type none;
                 display inline-block;
                 text-decoration none;
-                height 45px;
-                line-height 45px;
-                padding 0 15px;
+                height 88px;
+                line-height 88px;
+                padding 0 50px;
                 color #71777c;
             .click-active
                 color blue !important;
-        .search
-            flex 6;
-            display flex;
-            align-items center;
-            justify-content center;
-            max-width 200px;
-            border: 1px solid hsla(0,0%,59.2%,.2);
-            height 30px;
-            margin-top 7px;
-            border-radius 5%;
-            input
-                border none;
-            button
-                background-color #fff;
-                border none;
-            .icon-search
-                color blue;
         .write
-            flex 2;
+            flex 1;
             display flex;
             align-items center;
             justify-content center;
@@ -129,4 +112,12 @@ export default {
                     height 30px;
                     border-radius 50%;
                     cursor pointer;
+        .user-register
+                .register
+                    color white;
+                .login
+                    color white;
+                .clickbox
+                    margin 0px 5px;
+
 </style>

@@ -19,7 +19,7 @@ Axios.interceptors.response.use((response) => {
     if(error.response.status === 401) {
         const data = {
             code: -1,
-            msg: '登录超时'
+            msg: 'Login timeout'
         };
         return Promise.reject(data);
     }
