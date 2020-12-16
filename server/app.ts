@@ -5,6 +5,13 @@ const bodyParser = require('koa-bodyparser');
 const koajwt = require('koa-jwt');  // koa中对token校验的中间件
 const koaStatic = require('koa-static');
 const path = require('path');
+const cors  = require('koa-cors');
+
+
+//跨域问题
+app.use(cors());
+
+
 
 // 错误处理
 app.use(async (ctx, next) => {

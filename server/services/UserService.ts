@@ -2,11 +2,12 @@ const UserModel = require('../models/UserModel.ts');
 
 module.exports = {
     // 插入一条记录
-    insertUser: async (username, password, email) => {
+    insertUser: async (username, password, email,avatar) => {
         return await UserModel.create({
             username: username,
             password: password,
-            email: email
+            email: email,
+            avatar:avatar,
         })
     },
     // 查询用户

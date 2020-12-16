@@ -8,13 +8,14 @@ module.exports = {
         await next();
         let username = ctx.request.body.username,
             email = ctx.request.body.email,
-            password = ctx.request.body.password;
+            password = ctx.request.body.password,
+            avatar = 'https://n.sinaimg.cn/sinacn20100/104/w452h452/20181225/916c-hqqzpkv4324535.jpg';
         // 1 判断用户是否存在(不存在返回空数组)
         let retArr = await UserService.findUser(email);
         if(retArr.length) {
             ctx.response.body = { success: false, msg: '账号已存在!' };
         } else {
-            let retData = await UserService.insertUser(username, tools.enbcrypt(password), email);
+            let retData = await UserService.insertUser(username, tools.enbcrypt(password), email,avatar);
             ctx.response.body = { success: true, msg: retData };
         }
     },
