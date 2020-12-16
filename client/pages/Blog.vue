@@ -12,6 +12,9 @@
                     <a @click.prevent="toEdit" 
                         style="display: inline-block; margin-left: 10px;"
                         v-if="isSelf">edit</a>
+                    <a @click.prevent="toDelete" 
+                        style="display: inline-block; margin-left: 10px; color: red;"
+                        v-if="isSelf">delete</a>
                 </p>
             </div>
         </div>
@@ -36,9 +39,13 @@
         </div>
         <div class="comment-list">
             <h2>comment</h2>
-            <comment-card v-for="comment in commentList" 
+            <template  v-for="comment in commentList" >
+            <comment-card
                 :key="comment.comment_id"
-                :comment="comment"></comment-card>
+                :comment="comment"
+                ></comment-card>
+            <span @click='toDeletecomment(comment.comment_id)' :key="comment.comment_id">delete</span>
+            </template>
         </div>
     </div>
 </template>
@@ -77,6 +84,36 @@ export default {
         }
     },
     methods: {
+        toDeletecomment(comment_id) {
+             this.axios.post('/users/comment', {
+                comment_id:comment_id,
+                blog_id: this.blog_id}
+            ).then(res=> {
+                this.getBlog() 
+                this.$Notify({
+                        title: 'notice',
+                        message: 'Delete succeeded',
+                        type: 'success'
+                });
+
+            }, err => {
+                console.log(err)
+            })            
+        },
+        toDelete() {
+            this.axios.delete('/users/delete/'+this.blog_id).then(res=> {
+                this.$Notify({
+                        title: 'notice',
+                        message: 'Delete succeeded',
+                        type: 'success'
+                });
+                this.$router.push({ 
+                name: 'home', 
+            });
+            }, err => {
+                console.log(err)
+            })
+        },
         getBlog() {
             this.axios.get('/blogs/id/' + this.blog_id).then(res => {
                 this.blog = res.data[0];
@@ -141,11 +178,14 @@ export default {
             }
         },
         getBlogComments() {
-            this.axios.get('/blogs/comments/' + this.blog.blog_id).then(res => {
+            this.axios.get('/blogs/comment/' + this.blog.blog_id).then(res => {
                 this.commentList = res.data;
             }, err => {
                 console.error(err);
             })
+        },
+        updatedata(e) {
+            this.getBlogComments();
         }
     }
 }

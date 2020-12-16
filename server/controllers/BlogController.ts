@@ -1,6 +1,13 @@
 const BlogService = require('../services/BlogService.ts');
 
 module.exports = {
+    // 删除博文
+    deleteBlog: async (ctx, next) => {
+        await next();
+        let blog_id = ctx.params.blog_id;
+        let blog = await BlogService.deleteBlogById(blog_id);
+        ctx.response.body = blog;
+    },
     // 新增博文
     addBlog: async (ctx, next) => {
         await next();

@@ -2,7 +2,8 @@
     <div id="comment-card">
         <div class="comment-box">
             <div class="user-img" @click="seeUser">
-                <img :src="comment.user.avatar" alt="404">
+                <img :src="comment.user.avatar" v-if="comment.user.avatar">
+                <img src="../../static/defaultAvatar.png" v-else>
             </div>
             <div class="comment-detail">
                 <h3 @click="seeUser">{{ comment.user.username }}</h3>
@@ -31,8 +32,10 @@
 export default {
     data() {
         return {
+            message:false,
             inputComment: '',
-            isShow: false
+            isShow: false,
+            deavater: 'https://wx1.sinaimg.cn/large/006CHHsBly1ghiiufy3qbj31kw1kwwly.jpg'
         }
     },
     props: {

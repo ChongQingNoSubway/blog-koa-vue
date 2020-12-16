@@ -23,7 +23,7 @@ export default {
         toDetail() {
             this.$router.push({ 
                 name: 'blog', 
-                query: { blog_id: this.$Base64.encode(this.blog.blog_id) } 
+                query: { blog_id: this.blog.blog_id } 
             });
         }
     }

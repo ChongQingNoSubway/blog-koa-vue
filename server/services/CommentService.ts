@@ -6,6 +6,15 @@ const UserModel2 = require('../models/UserModel.ts');
 CommentModel.belongsTo(UserModel2, { foreignKey: 'email', targetKey: 'email' }); 
 
 module.exports = {
+    //删除评论 2
+    deleteBlogComments: async(comment_id,blog_id) => {
+        return await BlogModel.destory({
+            where: {
+                comment_id: comment_id,
+                blog_id:blog_id
+            }
+        })
+    },
     // 添加评论
     insertComment: async (email, blog_id, comment) => {
         return await CommentModel.create({

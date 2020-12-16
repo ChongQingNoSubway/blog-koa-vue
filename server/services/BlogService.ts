@@ -4,6 +4,14 @@ const UserModel3 = require('../models/UserModel.ts');
 BlogModel.belongsTo(UserModel3, { foreignKey: 'email', targetKey: 'email' });
 
 module.exports = {
+    //删除博文
+    deleteBlogById: async(blog_id) => {
+        return await BlogModel.destory({
+            where: {
+                blog_id: blog_id
+            }
+        })
+    },
     // 插入博文记录
     insertBlog: async (title, email, content) => {
         return await BlogModel.create({

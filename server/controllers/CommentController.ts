@@ -16,5 +16,13 @@ module.exports = {
         let blog_id = ctx.params.blog_id;
         let comments = await CommentService.findBlogComments(blog_id);
         ctx.response.body = comments;
+    },
+    //删除评论
+    deleteComment: async(ctx, next) => {
+        await next();
+        let comment_id = ctx.request.body.comment_id;
+        let blog_id = ctx.request.body.blog_id;
+        let comments = await CommentService.deleteBlogComments(comment_id,blog_id);
+        ctx.response.body = comments;
     }
 }

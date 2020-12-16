@@ -26,8 +26,12 @@ module.exports = (app) => {
     koaRouter.get('/users/unfollow/:user_email', FollowController.getFans);
     // 判断是否关注某个用户
     koaRouter.post('/users/isFollow', FollowController.isFollowOne);
-
-
+    // 获取关注者blog
+    koaRouter.get('/blogs/email/:email',BlogController.getBlogsByEmail)
+    //删除Blog
+    koaRouter.delete('/users/delete/:blog_id', BlogController.deleteBlog);
+    //删除评论 
+    koaRouter.delete('/comment/delete', CommentController.deleteComment);
     // 2.博客资源RestFul API
     // 获取所有博客类型
     // 新增博客
@@ -40,8 +44,9 @@ module.exports = (app) => {
     // 添加评论
     koaRouter.post('/blogs/comment', CommentController.addComment);
     // 获取评论
-    koaRouter.get('/blogs/comments/:blog_id', CommentController.getComments);
-
+    koaRouter.get('/blogs/comment/:blog_id', CommentController.getComments);
+    //根据id拿blog
+    koaRouter.get('/blogs/id/:blog_id', BlogController.getBlogById);
 
     app.use(koaRouter.routes()).use(koaRouter.allowedMethods());
 };
